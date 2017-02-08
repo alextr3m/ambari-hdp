@@ -1,0 +1,5 @@
+{ 
+  "Repositories" : { 
+    "base_url":"http://c6601.ambari.apache.org/HDP/centos6/2.x/updates/2.4.3.0", "verify_base_url":true 
+  }
+}

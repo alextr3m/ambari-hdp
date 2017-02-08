@@ -1,0 +1,5 @@
+{ 
+  "Repositories" : { 
+   "base_url":"http://c6601.ambari.apache.org/HDP-UTILS-1.1.0.20/repos/centos6", "verify_base_url":true 
+  }
+}

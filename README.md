@@ -2,9 +2,12 @@
 
 ## Compiling the project
 
-Build Hortonworks HDP cluster form scratch.  
+Builds Hortonworks HDP cluster form scratch.  
 
-To build a self-contained jar:
+## Prerequisities
+
+- VirtualBox
+- Vagrant
 
     $ mvn package
 

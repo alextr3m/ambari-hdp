@@ -1,0 +1,13 @@
+{
+  "blueprint" : "blueprint",
+  "host_groups" :[
+    {
+      "name" : "master", 
+      "hosts" : [         
+        {
+          "fqdn" : "c6601.ambari.apache.org"
+        }
+      ]
+    }
+  ]
+}
