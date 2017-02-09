@@ -5,21 +5,21 @@
       "name" : "master", 
       "hosts" : [         
         {
-          "fqdn" : "c6601.ambari.apache.org"
+          "fqdn" : "c6601.barenode.org"
         }
       ]
     },
     {
-      "name" : "slaves", 
+      "name" : "slave", 
       "hosts" : [
         {
-          "fqdn" : "c6602.ambari.apache.org"
+          "fqdn" : "c6602.barenode.org"
         },
         {
-          "fqdn" : "c6603.ambari.apache.org"
+          "fqdn" : "c6603.barenode.org"
         },
         {
-          "fqdn" : "c6604.ambari.apache.org"
+          "fqdn" : "c6604.barenode.org"
         }
       ]
     }

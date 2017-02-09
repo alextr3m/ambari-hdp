@@ -1,3 +1,12 @@
+notify { "Provisioning default on ${hostname} node.": }
+
+# /etc/hosts
+host { 'c6601':   ip => '192.168.66.101',  host_aliases => [ 'c6601.barenode.org', 'c6601']}
+host { 'c6602':   ip => '192.168.66.102',  host_aliases => [ 'c6602.barenode.org', 'c6602']}
+host { 'c6603':   ip => '192.168.66.103',  host_aliases => [ 'c6603.barenode.org', 'c6603']}
+host { 'c6604':   ip => '192.168.66.104',  host_aliases => [ 'c6604.barenode.org', 'c6604']}
+
+#Java SDK
 # ugly
 file {[
   '/usr/jdk64']: 
@@ -23,14 +32,6 @@ exec { "untar_sdk":
   logoutput => true,
   require      => Exec["unzip_sdk"]
 }
-
-notify { "Provisioning default on ${hostname} node.": }
-
-# /etc/hosts
-host { 'c6601':   ip => '192.168.66.101',  host_aliases => [ 'c6601.ambari.apache.org', 'c6601']}
-host { 'c6602':   ip => '192.168.66.102',  host_aliases => [ 'c6602.ambari.apache.org', 'c6602']}
-host { 'c6603':   ip => '192.168.66.103',  host_aliases => [ 'c6603.ambari.apache.org', 'c6603']}
-host { 'c6604':   ip => '192.168.66.104',  host_aliases => [ 'c6604.ambari.apache.org', 'c6604']}
 
 service { 'iptables':
   ensure => 'stopped',
@@ -60,26 +61,8 @@ service { 'httpd':
   require => Package['httpd']
 }
 
-
-
-#yumrepo { 'ambari':
-#  baseurl => "http://c6601.ambari.apache.org/ambari-2.2.1.0/centos6/2.2.1.0-161/",
-#  descr => "ambari repository",
-#  enabled => 1,
-#  gpgcheck => 0,
-#  require => Service['httpd']
-#}
-
-#yumrepo { 'ambari':
-#  baseurl => "http://public-repo-1.hortonworks.com/ambari/centos6/2.x/updates/2.4.1.0/",
-#  descr => "ambari repository",
-#  enabled => 1,
-#  gpgcheck => 0,
-#  require => Service['httpd']
-#}
-
 yumrepo { 'ambari':
-  baseurl => "http://c6601.ambari.apache.org/ambari-2.4.2.0/centos6/2.4.2.0-136",
+  baseurl => "http://localhost/ambari-2.4.2.0/centos6/2.4.2.0-136",
   descr => "ambari repository",
   enabled => 1,
   gpgcheck => 0,
@@ -93,16 +76,16 @@ package { 'ambari-agent' :
   require => Yumrepo['ambari']
 }
 
-#file { '/etc/ambari-agent/conf/ambari-agent.ini':
-#  ensure  => file,
-#  content => template('ambari-agent.ini'),
-#  require => Package['ambari-agent']
-#}
+file { '/etc/ambari-agent/conf/ambari-agent.ini':
+  ensure  => file,
+  content => template('ambari-agent.ini'),
+  require => Package['ambari-agent']
+}
 
 service { 'ambari-agent':
   ensure 		=> running,
   enable 		=> true,
-  require => Package['ambari-agent']
+  require => File['/etc/ambari-agent/conf/ambari-agent.ini']
 }
 
 
