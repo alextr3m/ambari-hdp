@@ -58,6 +58,12 @@
       "cardinality" : "2"
     }
   ],
+  "settings" : [{
+    "recovery_settings" : [{
+      "recovery_enabled" : "true"
+    }
+    ]}
+  ],
   "Blueprints" : {
     "blueprint_name" : "blueprint",
     "stack_name" : "HDP",
