@@ -1,10 +1,15 @@
 notify { "Provisioning default on ${hostname} node.": }
 
 # /etc/hosts
-host { 'c6601':   ip => '192.168.66.101',  host_aliases => [ 'c6601.barenode.org', 'c6601']}
-host { 'c6602':   ip => '192.168.66.102',  host_aliases => [ 'c6602.barenode.org', 'c6602']}
-host { 'c6603':   ip => '192.168.66.103',  host_aliases => [ 'c6603.barenode.org', 'c6603']}
-host { 'c6604':   ip => '192.168.66.104',  host_aliases => [ 'c6604.barenode.org', 'c6604']}
+#host { 'c6601':   ip => '192.168.66.101',  host_aliases => [ 'c6601.barenode.org', 'c6601']}
+#host { 'c6602':   ip => '192.168.66.102',  host_aliases => [ 'c6602.barenode.org', 'c6602']}
+#host { 'c6603':   ip => '192.168.66.103',  host_aliases => [ 'c6603.barenode.org', 'c6603']}
+#host { 'c6604':   ip => '192.168.66.104',  host_aliases => [ 'c6604.barenode.org', 'c6604']}
+
+file { '/etc/hosts':
+  ensure  => file,
+  content => template('hosts')
+}
 
 #Java SDK
 # ugly
@@ -53,6 +58,7 @@ service { 'ntpd':
 package { 'httpd' : 
   ensure => 'installed',
   allow_virtual => false,
+  require => File['/etc/hosts']
 }
 
 service { 'httpd':

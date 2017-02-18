@@ -8,6 +8,14 @@
           "fqdn" : "c6601.barenode.org"
         }
       ]
+    },
+    {
+      "name" : "slave", 
+      "hosts" : [
+        {
+          "fqdn" : "c6602.barenode.org"
+        }
+      ]
     }
   ]
 }
