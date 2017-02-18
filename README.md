@@ -1,9 +1,10 @@
 # Ambari - HDP
 
-Builds Hortonworks HDP cluster form scratch.
+Builds Hortonworks HDP cluster form scratch
 
-CentOS 7.2
-Vagrant box puppetlabs/centos-7.2-64-puppet
+`CentOS 7.2`
+ 
+Vagrant box `puppetlabs/centos-7.2-64-puppet`
 
 ## YUM repos
 
