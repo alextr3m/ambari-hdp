@@ -7,6 +7,7 @@ Builds Hortonworks HDP cluster form scratch.
 | Content Cell  | Content Cell  |
 | Content Cell  | Content Cell  |
 
+| First Header  | Second Header | Second Header |
 | -------------| ----------- | --------------------------------------------------------------------------- |
 | ambari       | 2.4.2.0     | http://public-repo-1.hortonworks.com/ambari/centos7/2.x/updates/2.4.2.0     |
 | HDP          | 2.5.0.0     | http://public-repo-1.hortonworks.com/HDP/centos7/2.x/updates/2.5.0.0        |
