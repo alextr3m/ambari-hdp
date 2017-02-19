@@ -5,7 +5,7 @@
       "name" : "master", 
       "hosts" : [         
         {
-          "fqdn" : "c6601.barenode.org"
+          "fqdn" : "c7201.barenode.org"
         }
       ]
     }

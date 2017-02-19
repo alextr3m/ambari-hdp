@@ -1,5 +1,5 @@
 { 
   "Repositories" : { 
-   "base_url":"http://localhost/HDP-UTILS-1.1.0.20/repos/centos6", "verify_base_url":true 
+   "base_url":"http://localhost/HDP-UTILS-1.1.0.21/repos/centos7", "verify_base_url":true 
   }
 }

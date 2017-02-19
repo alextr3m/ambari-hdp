@@ -5,7 +5,7 @@
       "name" : "master", 
       "hosts" : [         
         {
-          "fqdn" : "c6601.barenode.org"
+          "fqdn" : "c7201.barenode.org"
         }
       ]
     },
@@ -13,7 +13,13 @@
       "name" : "slave", 
       "hosts" : [
         {
-          "fqdn" : "c6602.barenode.org"
+          "fqdn" : "c7202.barenode.org"
+        },
+        {
+          "fqdn" : "c7203.barenode.org"
+        },
+        {
+          "fqdn" : "c7204.barenode.org"
         }
       ]
     }

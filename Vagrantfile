@@ -4,13 +4,15 @@ VAGRANTFILE_API_VERSION = "2"
 Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|                                          
   
   # box  
-  config.vm.box = "/dev/vagrant/c66/package.box"
-  #config.vm.box = "puppetlabs/centos-6.6-64-puppet"      
-  #config.vm.box_version = "1.0.1"  
+  #config.vm.box = "/dev/vagrant/c66/package.box"
+  config.vm.box = "/dev/vagrant/c72/package.box"
+  #config.vm.box = "puppetlabs/centos-7.2-64-puppet" 
   
   #local repo dir  
   config.vm.synced_folder '../yum-repo', '/var/www/html', type: 'nfs'
-  config.vm.synced_folder './templates', '/tmp/vagrant-puppet/templates', type: 'nfs'
+#  config.vm.synced_folder './templates', '/tmp/vagrant-puppet/templates', type: 'nfs'
+#  config.vm.synced_folder './log/ambari-server', '/var/log/ambari-server', type: 'nfs' 
+#  config.vm.synced_folder './log/ambari-agent', '/var/log/ambari-agent', type: 'nfs' 
   config.vm.synced_folder './log/hadoop', '/var/log/hadoop', type: 'nfs' 
   config.vm.synced_folder './log/hbase', '/var/log/hbase', type: 'nfs' 
   
@@ -21,45 +23,48 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   end
   
   config.vm.provision :puppet do |puppet|
+    puppet.environment_path = "environments"
+    puppet.module_path = "modules"
     puppet.manifests_path =  "./manifests/"
     puppet.manifest_file  =  "ambari-agent.pp"
-    puppet.options = "--verbose --debug --templatedir /tmp/vagrant-puppet/templates"
+    puppet.options = "--verbose --debug"
   end 
 
-  # c6601
-  config.vm.define :c6601 do |c6601|
+  # c7201
+  config.vm.define :c7201 do |c7201|
     
-    c6601.vm.hostname = "c6601.barenode.org"
-    c6601.vm.network :private_network, ip: "192.168.66.101"    
-    c6601.vm.synced_folder './blueprints', '/tmp/vagrant-puppet/blueprints', type: 'nfs'   
+    c7201.vm.hostname = "c7201.barenode.org"
+    c7201.vm.network :private_network, ip: "192.168.72.101"    
+    c7201.vm.synced_folder './blueprints', '/tmp/vagrant-puppet/blueprints', type: 'nfs'   
     
-    c6601.vm.provider :virtualbox do |vb|
+    c7201.vm.provider :virtualbox do |vb|
       vb.customize ["modifyvm", :id, "--memory", 9216] 
       vb.customize ["modifyvm", :id, "--cpus", 4] 
     end
     
-    c6601.vm.provision :puppet do |puppet|
+    c7201.vm.provision :puppet do |puppet|
+      puppet.environment_path = "environments"
       puppet.manifests_path =  "./manifests/"
       puppet.manifest_file  =  "ambari-server.pp"
     end     
   end 
   
-  # c6602
- #  config.vm.define :c6602 do |c6602|
- #    c6602.vm.hostname = "c6602.barenode.org"
- #    c6602.vm.network :private_network, ip: "192.168.66.102"
- #  end
+  # c7202
+   config.vm.define :c7202 do |c7202|
+     c7202.vm.hostname = "c7202.barenode.org"
+     c7202.vm.network :private_network, ip: "192.168.72.102"
+   end
   
-  # c6603
- # config.vm.define :c6603 do |c6603|
- #   c6603.vm.hostname = "c6603.barenode.org"
- #   c6603.vm.network :private_network, ip: "192.168.66.103"
- # end
+  # c7203
+  config.vm.define :c7203 do |c7203|
+    c7203.vm.hostname = "c7203.barenode.org"
+    c7203.vm.network :private_network, ip: "192.168.72.103"
+  end
   
-  # c6604
- # config.vm.define :c6604 do |c6604|
- #   c6604.vm.hostname = "c6604.barenode.org"
- #   c6604.vm.network :private_network, ip: "192.168.66.104"
-#  end
+  # c7204
+ config.vm.define :c7204 do |c7204|
+    c7204.vm.hostname = "c7204.barenode.org"
+    c7204.vm.network :private_network, ip: "192.168.72.104"
+  end
       
 end

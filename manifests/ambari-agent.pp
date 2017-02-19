@@ -1,14 +1,14 @@
 notify { "Provisioning default on ${hostname} node.": }
 
 # /etc/hosts
-#host { 'c6601':   ip => '192.168.66.101',  host_aliases => [ 'c6601.barenode.org', 'c6601']}
-#host { 'c6602':   ip => '192.168.66.102',  host_aliases => [ 'c6602.barenode.org', 'c6602']}
-#host { 'c6603':   ip => '192.168.66.103',  host_aliases => [ 'c6603.barenode.org', 'c6603']}
-#host { 'c6604':   ip => '192.168.66.104',  host_aliases => [ 'c6604.barenode.org', 'c6604']}
+#host { 'c7201':   ip => '192.168.72.101',  host_aliases => [ 'c7201.barenode.org', 'c7201']}
+#host { 'c7202':   ip => '192.168.72.102',  host_aliases => [ 'c7202.barenode.org', 'c7202']}
+#host { 'c7203':   ip => '192.168.72.103',  host_aliases => [ 'c7203.barenode.org', 'c7203']}
+#host { 'c7204':   ip => '192.168.72.104',  host_aliases => [ 'c7204.barenode.org', 'c7204']}
 
 file { '/etc/hosts':
   ensure  => file,
-  content => template('hosts')
+  content => template('common/hosts')
 }
 
 #Java SDK
@@ -38,7 +38,7 @@ exec { "untar_sdk":
   require      => Exec["unzip_sdk"]
 }
 
-service { 'iptables':
+service { 'firewalld':
   ensure => 'stopped',
   enable => 'false'
 }
@@ -57,8 +57,7 @@ service { 'ntpd':
 #local YUM repo
 package { 'httpd' : 
   ensure => 'installed',
-  allow_virtual => false,
-  require => File['/etc/hosts']
+  allow_virtual => false
 }
 
 service { 'httpd':
@@ -68,8 +67,8 @@ service { 'httpd':
 }
 
 yumrepo { 'ambari':
-  baseurl => "http://localhost/ambari-2.4.2.0/centos6/2.4.2.0-136",
-  descr => "ambari repository",
+  baseurl => "http://localhost/ambari/centos7/2.x/updates/2.4.2.0",
+  descr => "AMBARI",
   enabled => 1,
   gpgcheck => 0,
   require => Service['httpd']
@@ -84,14 +83,14 @@ package { 'ambari-agent' :
 
 file { '/etc/ambari-agent/conf/ambari-agent.ini':
   ensure  => file,
-  content => template('ambari-agent.ini'),
+  content => template('common/ambari-agent.ini'),
   require => Package['ambari-agent']
 }
 
 service { 'ambari-agent':
   ensure 		=> running,
   enable 		=> true,
-  require => File['/etc/ambari-agent/conf/ambari-agent.ini']
+  require => File['/etc/ambari-agent/conf/ambari-agent.ini']  
 }
 
 

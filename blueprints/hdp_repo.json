@@ -1,5 +1,5 @@
 { 
   "Repositories" : { 
-    "base_url":"http://localhost/HDP/centos6/2.x/updates/2.4.3.0", "verify_base_url":true 
+    "base_url":"http://localhost/HDP/centos7/2.x/updates/2.5.0.0", "verify_base_url":true 
   }
 }
